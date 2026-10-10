@@ -12,6 +12,7 @@
   - [Objetivos](#objetivos)
   - [Identidade e Escopo](#identidade-e-escopo)
   - [Transporte e Codificação](#transporte-e-codificação)
+  - [Parametrização (config.json)](#parametrização-configjson)
   - [Integração com o Servidor Rendezvous](#integração-com-o-servidor-rendezvous)
   - [Protocolo de Comunicação entre Peers](#protocolo-de-comunicação-entre-peers)
     - [HELLO / HELLO\_OK](#hello--hello_ok)
@@ -129,6 +130,34 @@ Cada peer é identificado como `name@namespace`, por exemplo `alice@CIC`.
 - **Timeout:** conexões fechadas em caso de erro de leitura/escrita
 
 ---
+
+## Parametrização (config.json)
+
+O cliente deve ler suas configurações iniciais a partir de um arquivo `config.json` localizado na raiz do projeto. Este arquivo centraliza os parâmetros de rede, temporizadores (timeouts/intervalos) e limites da aplicação.
+
+O formato estrutural obrigatório do arquivo é o seguinte:
+
+```json
+{
+  "rdv_host": "pyp2p.mfcaetano.cc",
+  "rdv_port": 8080,
+  "namespace": "CIC",
+  "name": "alice",
+  "listen_port": 8081,
+  "register_ttl": 7200,
+  "discover_interval": 20,
+  "ping_interval": 30,
+  "ping_miss_limit": 3,
+  "max_reconnect_attempts": 5,
+  "base_backoff": 2,
+  "max_backoff": 60,
+  "lives": 6,
+  "max_players": 4,
+  "turn_timeout": 30,
+  "words_file": "words.txt",
+  "log_file": null
+}
+```
 
 ## Integração com o Servidor Rendezvous
 
